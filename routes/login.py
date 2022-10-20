@@ -79,12 +79,12 @@ def añadir():
     newInstance3 = Registros(1500,'alfajor','+','2022-08-03',1)
     db.session.add(newUser)
     db.session.add(newInstance1)
-    #db.session.add(newInstance2)
-    #db.session.add(newInstance3)
+    db.session.add(newInstance2)
+    db.session.add(newInstance3)
     db.session.commit()
     newInstance1.añadir_plata()
-    #newInstance2.añadir_plata()
-    #newInstance3.añadir_plata()
+    newInstance2.añadir_plata()
+    newInstance3.añadir_plata()
     db.session.commit()
     return 'Añadido!!'
 
