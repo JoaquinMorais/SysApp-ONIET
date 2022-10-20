@@ -7,97 +7,76 @@ Login = Blueprint("Login",__name__)
 
 
 
-@Login.route("/singin",methods=['GET','POST'])
-def singin():
-    newInstance = Usuarios('pepe','garcia')
-    db.session.add(newInstance)
-    db.session.commit()
 
-    return 'Añadido Con Exito!!'
-            
-@Login.route("/push",methods=['GET','POST'])
-def push():
-    database = Usuarios.query.all()
-    return render_template('login/prueba.html',globalVariable = database)
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-@Login.before_request
-def before_request():
-    if 'user_id' in session:
-        database = Usuarios.query.all()
-        try:
-            user = [x for x in database if x.id == session['user_id']][0]
-            g.user = user
-        except:
-            pass
-    else:
-        g.user = None
-
-@Login.route("/login",methods=['GET','POST'])
-def login():
-    if request.method == 'POST':
-        session.pop('user_id',None)
-        username = request.form['username']
-        password = request.form['password']
-        #remember = request.form['remember']
-        database = Usuarios.query.all()
-        print(database)
-        user = [x for x in database if x.username == username]
-        if len(user)!=0 and user[0].password == password:
-            user = user[0]
-            session['user_id'] = user.id
-            return redirect(url_for('Login.profile'))
-
-        return redirect(url_for('Login.login'))
-
-
-    return render_template("login/login.html")
-
-@Login.route("/profile")
-def profile():
-    if not g.user:
-        return redirect(url_for('Login.login'))
-    return render_template("login/profile.html")
+user = None
 
 
 @Login.route("/singin",methods=['GET','POST'])
 def singin():
     if request.method == 'POST':
-        session.pop('user_id',None)
+        global user
         username = request.form['username']
         password = request.form['password']
 
         database = Usuarios.query.all()
-        user = [x for x in database if x.username == username]
-        if len(user)!=0:
+        print(f'Values {username}, {password}')
+        user = ([x for x in database if x.username == username]+[False])[0]
+        print
+        
+        if user != False:
             flash(f'Este nombre de usuario ya ha sido seleccionado, intentelo nuevamente')
             return redirect(url_for('Login.singin'))
         else:
             newInstance = Usuarios(username,password)
             db.session.add(newInstance)
             db.session.commit()
+            user = newInstance
 
-            session['user_id'] = Usuarios.query.all()[-1].id
         return redirect(url_for('Login.profile'))
         
 
     flash('')
     return render_template("login/singin.html")
-"""
+
+
+@Login.route("/login",methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        nm = request.form['username']
+        pw = request.form['password']
+        usuario = Usuarios.query.filter_by(username = nm).all()
+        
+        if len(usuario)!=0 and usuario[0].password == pw:
+            global user
+        
+            user = usuario[0]
+            return redirect(url_for('Login.profile'))
+
+
+
+    return render_template("login/login.html")
+
+
+
+
+@Login.route("/profile")
+def profile():
+    global user
+    g.usuario = user
+    return render_template("login/profile.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
