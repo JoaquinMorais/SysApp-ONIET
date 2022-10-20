@@ -1,47 +1,45 @@
-{% extends "base.html" %}
-{% block title %}
-    Sing In
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login/singin_css.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>Registrarse</title>
+</head>
+<body>
+    
+    <div class="login-container">
+        <div class="login">
+            <div class="login-logo">
+                <img src="{{ url_for('static',filename='src/moneda.png') }}" alt="logo">
+            </div>
 
-{% block head %}
-    <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/base_css.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/login/login_css.css') }}">
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- SCROOL REVEAL -->
-    <script src="https://unpkg.com/scrollreveal"></script>
+            <div class="login-header">
+                <h1>REGISTRARSE</h1>
+                <p>¡Bienvenido! Por favor, registrese para poder continuar</p>
+            </div>
 
-{% endblock %}
+            <form class="login-form" method="post">
+                <div class="form-item">
+                    <span class="form-item-icon material-symbols-rounded">person</span>
+                    <input type="text" placeholder="Ponga su usuario" required autofocus name="username">
+                </div>
 
+                <div class="form-item">
+                    <span class="form-item-icon material-symbols-rounded">lock</span>
+                    <input type="password" placeholder="Ponga su contraseña" required name="password">
+                </div>
 
-{% block content %}
-    <h1>Estas en Sing In!!!</h1>
-    <form method="post">
-        <div class="imgcontainer">
-          <img src="img_avatar2.png" alt="" class="avatar">
+                <button type="submit">Registrarse</button>
+            </form>
+
+            <div class="login-card-footer">
+                <a href="{{ url_for('Login.login') }}">Ya tengo cuenta</a>
+            </div>
         </div>
-      
-        <div class="container">
-          <label for="uname"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username" name="username" required>
-          
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              {% for msg in messages %}
-                <p>{{msg}}</p>
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
+    </div>
 
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" required>
-          
-          <button type="submit">Sing In</button>
-          
-        </div>
-      
-        
-    </form>
-    <a href="{{ url_for('Login.login') }}"> Login</a>
-{% endblock %}
+</body>
+</html>

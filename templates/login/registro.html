@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login/registro_css.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>Plata inicial</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="container-foto">
+            <img src="{{ url_for('static',filename='src/chancho.jpg') }}" alt="chanchito">
+        </div>
+        <div class="container-input">
+            <div class="container-logo">
+                <img src="{{ url_for('static',filename='src/moneda.png') }}" alt="logo">
+            </div>
+            <div class="container-input-item">
+                <span class="container-input-item-icon1 material-symbols-outlined">attach_money</span>
+                <input class="container-input-item-monto" type="number" placeholder="Ingrese su monto" required autofocus>
+            </div>
+            <div class="container-input-item">
+                <div class="container-input-item-radio">
+                    <p class="pos"><input type="radio" name="Tipo" value="+">Ingreso</p>
+                    <p class="neg"><input type="radio" name="Tipo" value="-">Perdida</p>
+                </div>
+            </div>
+            
+            <div class="container-input-item">
+                <span class="container-input-item-icon2 material-symbols-outlined">description</span>
+                <input class="container-input-item-descripcion" type="text" placeholder="Agregue una descripcion">
+            </div>
+            <div class="container-button">
+                <button type="submit">¡Listo!</button>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+</html>

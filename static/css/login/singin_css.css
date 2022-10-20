@@ -5,7 +5,7 @@
 body{
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-    background: linear-gradient(to right, rgb(0, 0, 211), rgb(0, 221, 221));
+    background: linear-gradient(to right, rgb(4, 0, 255), rgb(255, 81, 0));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -147,6 +147,10 @@ body{
 
     .login input[type="text"], .login input[type="password"], .login input[type="email"]{
         font-size: 12px;
+    }
+
+    .login-footer{
+        font-size: 10px;
     }
     
 }

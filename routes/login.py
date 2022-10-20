@@ -71,6 +71,16 @@ def profile():
     return redirect(url_for('Login.login'))
 
 
+@Login.route("/registro")
+def returnRegistro():
+    return render_template("login/registro.html")
+
+@Login.route("/sueldo")
+def returnSueldo():
+    return render_template("login/sueldo.html")
+
+
+
 @Login.route("/añadir")
 def añadir():
     newUser = Usuarios('Admin','Admin')
