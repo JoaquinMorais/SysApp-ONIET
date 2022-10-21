@@ -12,33 +12,34 @@
     
     <div class="container">
         <div class="container-foto">
-            <img src="static/src/billetera.jpg" alt="chanchito">
+            <img src="{{ url_for('static',filename='src/billetera.jpg') }}" alt="chanchito">
         </div>
         <div class="container-input">
             <div class="container-logo">
-                <img src="/static/src/moneda.png" alt="logo">
+                <img src="{{ url_for('static',filename='src/moneda.png') }}" alt="logo">
             </div>
-            <div class="container-input-item">
-                <span class="container-input-item-icon1 material-symbols-outlined">local_atm</span>
-                <input class="container-input-item-monto" type="number" placeholder="Ingrese su sueldo" required autofocus>
-            </div>
-
-            <div class="centrar">
+            <form method="post">
                 <div class="container-input-item">
-                    <input class="container-input-item-monto" type="date" placeholder="Ingrese la fecha de sueldo" required autofocus>
+                    <span class="container-input-item-icon1 material-symbols-outlined">local_atm</span>
+                    <input class="container-input-item-monto" type="number" placeholder="Ingrese su sueldo" required autofocus name="sueldo">
                 </div>
-            </div>
 
-            
-            
-            <div class="container-input-item">
-                <span class="container-input-item-icon2 material-symbols-outlined">description</span>
-                <input class="container-input-item-descripcion" type="text" placeholder="Agregue una descripcion">
-            </div>
-            <div class="container-button">
-                <button type="submit">¡Listo!</button>
-            </div>
-            
+                <div class="centrar">
+                    <p>Seleccione el dia cuando va a recibir su proximo sueldo</p>
+                    
+                    <div class="container-input-item">
+                        
+                        <input class="container-input-item-monto" type="date" placeholder="Ingrese la fecha de sueldo" required autofocus name="fecha">
+                    </div>
+                </div>                
+                <div class="container-input-item">
+                    <span class="container-input-item-icon2 material-symbols-outlined">description</span>
+                    <input class="container-input-item-descripcion" type="text" placeholder="Agregue una descripcion" name="descripcion">
+                </div>
+                <div class="container-button">
+                    <button type="submit">¡Listo!</button>
+                </div>
+            </form>
         </div>
     </div>
 

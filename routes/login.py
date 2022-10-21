@@ -1,8 +1,10 @@
 from flask import Blueprint,render_template,redirect,url_for,request,session,g,abort,flash,jsonify
-from models.databases import Usuarios,Registros
+from models.databases import Usuarios,Registros,Sueldos
 from utils.db import db
 from datetime import date
+from dateutil import relativedelta
 import crypt
+
 
 Login = Blueprint("Login",__name__)
 
@@ -71,13 +73,40 @@ def profile():
     return redirect(url_for('Login.login'))
 
 
-@Login.route("/registro")
+@Login.route("/registro",methods=['GET','POST'])
 def returnRegistro():
-    return render_template("login/registro.html")
-
+    global user
+    if user:
+        if request.method == 'POST':
+            mt = request.form['monto']
+            tp = request.form['tipo']
+            desc = request.form['descripcion']
+   
+            newInstance = Registros(int(mt),desc,tp,date.today(),user.idUsuario)
+            db.session.add(newInstance)
+            db.session.commit()
+            newInstance.añadir_plata()
+            db.session.commit()
+            return redirect(url_for('Login.profile'))
+        else:
+            return render_template("login/registro.html")
+    return redirect(url_for('Login.login'))
 @Login.route("/sueldo")
 def returnSueldo():
-    return render_template("login/sueldo.html")
+    global user
+    if user:
+        if request.method == 'POST':
+            mt = request.form['sueldo']
+            fc = request.form['fecha']
+            desc = request.form['descripcion']
+   
+            newInstance = Sueldos(int(mt),desc,fc,user.idUsuario)
+            db.session.add(newInstance)
+            db.session.commit()
+            return redirect(url_for('Login.profile'))
+        else:
+            return render_template("login/registro.html")
+    return redirect(url_for('Login.login'))
 
 
 

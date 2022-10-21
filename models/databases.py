@@ -24,6 +24,7 @@ class Usuarios(db.Model):
     plataTotal = db.Column(db.Integer)
 
     registros = db.relationship('Registros')
+    sueldos = db.relationship('Sueldos')
 
     def __init__(self,username,password):
         self.username = username
@@ -86,3 +87,24 @@ class Registros(db.Model):
     
     def __repr__(self):
         return f'<Registros: {self.idRegistro}>'
+
+
+
+class Sueldos(db.Model):
+    __tablename__ = 'sueldos'
+    idSueldo = db.Column(db.Integer, primary_key = True)
+    monto = db.Column(db.Integer)
+    descripcion = db.Column(db.String(100))
+    fecha = db.Column(db.Date)
+    
+    idUsuario = db.Column(db.Integer, db.ForeignKey('usuarios.idUsuario'))
+    usuario = db.relationship('Usuarios')
+
+    def __init__(self,monto,descripcion,fecha,idUsuario):
+        self.monto = monto
+        self.descripcion = descripcion
+        self.fecha = fecha
+        self.idUsuario = idUsuario 
+          
+    def __repr__(self):
+        return f'<Registros: {self.idSueldo}>'

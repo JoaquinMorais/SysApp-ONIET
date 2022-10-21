@@ -18,25 +18,26 @@
             <div class="container-logo">
                 <img src="{{ url_for('static',filename='src/moneda.png') }}" alt="logo">
             </div>
-            <div class="container-input-item">
-                <span class="container-input-item-icon1 material-symbols-outlined">attach_money</span>
-                <input class="container-input-item-monto" type="number" placeholder="Ingrese su monto" required autofocus>
-            </div>
-            <div class="container-input-item">
-                <div class="container-input-item-radio">
-                    <p class="pos"><input type="radio" name="Tipo" value="+">Ingreso</p>
-                    <p class="neg"><input type="radio" name="Tipo" value="-">Perdida</p>
+            <form method="post">
+                <div class="container-input-item">
+                    <span class="container-input-item-icon1 material-symbols-outlined">attach_money</span>
+                    <input class="container-input-item-monto" type="number" placeholder="Ingrese su monto" required autofocus name="monto">
                 </div>
-            </div>
-            
-            <div class="container-input-item">
-                <span class="container-input-item-icon2 material-symbols-outlined">description</span>
-                <input class="container-input-item-descripcion" type="text" placeholder="Agregue una descripcion">
-            </div>
-            <div class="container-button">
-                <button type="submit">¡Listo!</button>
-            </div>
-            
+                <div class="container-input-item">
+                    <div class="container-input-item-radio">
+                        <p class="pos"><input type="radio" name="tipo" value="+">Ingreso</p>
+                        <p class="neg"><input type="radio" name="tipo" value="-">Perdida</p>
+                    </div>
+                </div>
+                
+                <div class="container-input-item">
+                    <span class="container-input-item-icon2 material-symbols-outlined">description</span>
+                    <input class="container-input-item-descripcion" type="text" placeholder="Agregue una descripcion" name="descripcion">
+                </div>
+                <div class="container-button">
+                    <button type="submit">¡Listo!</button>
+                </div>
+            </form>
         </div>
     </div>
 
