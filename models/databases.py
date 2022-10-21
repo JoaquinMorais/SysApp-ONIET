@@ -1,5 +1,7 @@
 from utils.db import db
 import crypt
+from datetime import date
+from dateutil import relativedelta as rd
 """
 class ExampleDatabase(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -44,8 +46,28 @@ class Usuarios(db.Model):
         else:
             self.plataTotal = 0
             self.registros[0].modificar(monto,descripcion,'=')
-        
+    
+    def ingresos_totales(self):
+        return sum([x.monto for x in self.registros if x.tipo == '+' or x.tipo == '='])
+    
+    def gastos_totales(self):
+        return sum([x.monto for x in self.registros if x.tipo == '-'])
 
+    def len_registros(self):
+        return len(self.registros)
+    
+    def ultimos_registros(self):
+        if self.len_registros() == 0:
+            return None
+        elif self.len_registros() >=10:
+            lista = self.registros[-10:]
+        else:
+            lista = self.registros
+        lista_reverse = []
+        largo = len(lista)
+        for i in range(largo):
+            lista_reverse.append(lista[largo-(1+i)])
+        return lista_reverse
 class Registros(db.Model):
     __tablename__ = 'registros'
     idRegistro = db.Column(db.Integer, primary_key = True)
@@ -108,3 +130,9 @@ class Sueldos(db.Model):
           
     def __repr__(self):
         return f'<Registros: {self.idSueldo}>'
+
+    def next_month(self):
+        if self.fecha <= date.today():
+            self.fecha += rd.relativedelta(months = 1)
+            return True
+        return False

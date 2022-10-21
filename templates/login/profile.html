@@ -1,13 +1,239 @@
-{% extends "base.html" %}
-{% block title %}
-    Profile
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/login/profile_css.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container_column">
+            <div class="container_v t1">
+                <div class="v_content v_image">
+                    <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfSfN5JOCG-ch9NfObJKaLyv6RUPyNZaDDP9bO_tF9Ccv-ET1gCgcgy5wJnlUdKslWkIk&usqp=CAU" alt="">
+                    <p>{{ g.user.username.upper() }}</p>
+                </div>
+                <div class="v_content">
+                    <div class="v_info ">
+                        <div class="container_style">
+                            <img class="icon i1" src="https://cdn-icons-png.flaticon.com/512/20/20925.png" alt="">
+                            <p>TU PLATA:</p> 
+                        </div>
+                        <p class="amount">
+                            {{ g.user.plataTotal }}$
+                        </p>             
+                    </div>
+                    <div class="v_info">
+                        <div class="container_style">
+                            <img class="icon i3" src="https://cdn-icons-png.flaticon.com/512/60/60481.png" alt="">
+                            <p>TU META:</p> 
+                        </div>
+                        <p class="amount">
+                            25000$
+                        </p> 
+                    </div>
+                    <div class="v_info">
+                        <div class="container_style">
+                            <img class="icon i2" src="https://cdn-icons-png.flaticon.com/512/1340/1340477.png" alt="">
+                            <p>TUS INGRESOS:</p> 
+                        </div>
+                        <p class="amount">
+                            {{ g.user.ingresos_totales() }}$
+                        </p> 
+                    </div>
+                    <div class="v_info">
+                        <div class="container_style">
+                            <img class="icon i4" src="https://cdn-icons-png.flaticon.com/512/126/126441.png" alt="">
+                            <p>TOTAL GASTADO</p> 
+                        </div>
+                        <p class="amount">
+                            {{ g.user.gastos_totales() }}$
+                        </p> 
+                    </div>
+                </div>
+            </div>
+            <div class="container_v t2">
+                <div class="v_buttons">
+                    <a href="">
+                        INGRESAR REGISTRO
+                    </a>
+                    <a href="">
+                        EDITAR ULTIMO REGISTRO
+                    </a>
+                </div>
+                {% if g.user.len_registros()>0 %}
+                    <div class="v_reg">
+                        <ul>
+                        {% for il in g.user.ultimos_registros() %}
+                            <li>
+                                {% if il.descripcion == 'auto' %}
+                                    <div class="container_style">
+                                        <img class="icon iOcio" src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-noir.png" alt="">
+                                        <p>OCIO:</p> 
+                                    </div>
+                                    <p class="amount negativo">  
+                                {% else %}
+                                    {% if il.descripcion == 'chupetin' %}
+                                        <div class="container_style">
+                                            <img class="icon iImpuesto" src="https://cdn-icons-png.flaticon.com/512/2228/2228838.png" alt="">
+                                            <p>IMPUESTOS:</p> 
+                                        </div>
+                                        <p class="amount negativo">
+                                {%  else %}
+                                    {% if il.descripcion == 'salud' %}
+                                    <li>
+                                        <div class="container_style">
+                                            <img class="icon iSalud" src="https://cdn-icons-png.flaticon.com/512/2786/2786369.png" alt="">
+                                            <p>SALUD:</p> 
+                                        </div>
+                                        <p class="amount negativo">
+                                {% else %}
+                                    {% if il.descripcion == 'servicios' %}
+                                    <li>
+                                        <div class="container_style">
+                                            <img class="icon iServicio" src="https://cdn-icons-png.flaticon.com/512/3267/3267605.png" alt="">
+                                            <p>SERVICIOS:</p> 
+                                        </div>
+                                        <p class="amount negativo">
+                                {% else %}
+                                    {% if il.descripcion == 'ingreso' %}
+                                    <li>
+                                        <div class="container_style">
+                                            <img class="icon iIngreso" src="https://cdn-icons-png.flaticon.com/512/50/50098.png" alt="">
+                                            <p>INGRESO:</p> 
+                                        </div>
+                                        <p class="amount positivo">
+                                {% else %}
+                                    {% if il.descripcion == 'gastronomia' %}
+                                        <li>
+                                        <div class="container_style">
+                                            <img class="icon iComida" src="https://cdn-icons-png.flaticon.com/512/685/685301.png" alt="">
+                                            <p>GASTRONOMIA:</p> 
+                                        </div>
+                                        <p class="amount negativo">
+                                {% else %}
+                                    {% if il.descripcion == 'compras' %}
+                                    <li>
+                                        <div class="container_style">
+                                            <img class="icon iCompras" src="https://cdn-icons-png.flaticon.com/512/4202/4202388.png" alt="">
+                                            <p>COMPRAS:</p> 
+                                        </div>
+                                        <p class="amount negativo">
+                                {% else %}
+                                    <li>
+                                        <div class="container_style">
+                                            <img class="icon iOtros" src="https://cdn-icons-png.flaticon.com/512/7182/7182095.png" alt="">
+                                            <p>OTROS:</p> 
+                                        </div>
+                                        <p class="amount negativo">
+                                {%  endif %}
+                                {%  endif %}
+                                {%  endif %}
+                                {%  endif %}
+                                {%  endif %}
+                                {%  endif %}
+                                {%  endif %}
+                                {{il.monto}}$
+                                </p>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container_column container_graph">
+            
+            <div class="graph_holder">
+                <h1>
+                    GRAFICO POR MES:
+                </h1>
+                <img src="https://www.aprenderpython.net/wp-content/uploads/2017/06/figura3.png" alt="">
+            </div>
+            <div class="graph_holder">
+                <h1>
+                    TU PLATA ESTE MES:
+                </h1>
+                <img src="https://www.aprenderpython.net/wp-content/uploads/2017/06/figura3.png" alt="">
+            </div>
+            <div class="graph_holder">
+                <h1>
+                    TUS GASTOS:
+                </h1>
+                <img src="https://www.merkle.com/es/sites/es/files/inline-images/tarta_1_0.png" alt="">
+            </div>
+            <div class="data_grid">
+                <div class="data_info grid_item">
+                    <img class="icon iIngreso" src="https://cdn-icons-png.flaticon.com/512/50/50098.png" alt="">
+                    <p>INGRESO:</p> 
+                    <p>50%</p>
+                </div>
+                <div class="data_info grid_item">
+                    <img class="icon iSalud" src="https://cdn-icons-png.flaticon.com/512/2786/2786369.png" alt="">
+                    <p>SALUD:</p> 
+                    <p>50%</p>
+                </div>
+                <div class="data_info grid_item">
+                    <img class="icon iComida" src="https://cdn-icons-png.flaticon.com/512/685/685301.png" alt="">
+                    <p>GASTRONOMIA:</p> 
+                    <p>50%</p>
+                </div>
+                <div class="data_info grid_item">
+                    <img class="icon iOcio" src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-noir.png" alt="">
+                    <p>OCIO:</p> 
+                    <p>50%</p>
+                </div>
+                <div class="data_info grid_item">
+                    <img class="icon iCompras" src="https://cdn-icons-png.flaticon.com/512/4202/4202388.png" alt="">
+                    <p>COMPRAS:</p> 
+                    <p>50%</p>
+                </div>
+                <div class="data_info grid_item">
+                    <img class="icon iOtros" src="https://cdn-icons-png.flaticon.com/512/7182/7182095.png" alt="">
+                    <p>OTROS:</p> 
+                    <p>50%</p>
+                </div>
+            </div>    
+            <div class="data_grid_small">
+                <div class="data_info grid_item">
+                    <img class="icon iImpuesto" src="https://cdn-icons-png.flaticon.com/512/2228/2228838.png" alt="">
+                    <p>IMPUESTOS:</p> 
+                    <p>50%</p>
+                </div>
+                <div class="data_info grid_item">
+                    <img class="icon iServicio" src="https://cdn-icons-png.flaticon.com/512/3267/3267605.png" alt="">
+                    <p>SERVICIOS:</p> 
+                    <p>50%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
 
+<!-- 
+                div class="v_reg">
+                    <ul>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li>
+                            <div class="container_style">
+                                <img class="icon iOtros" src="https://cdn-icons-png.flaticon.com/512/7182/7182095.png" alt="">
+                                <p>OTROS:</p> 
+                            </div>
+                            <p class="amount negativo">
+                                5000$
+                            </p>
+                        </li>
+                    </ul>
+                </div>
 
-{% block content %}
-    <h1>Estas en Profile!!!</h1>
-    <h2>{{g.usuario.username}}</h2>
-    <h2>{{g.usuario.id}}</h2>
-{% endblock %}
-
+ -->

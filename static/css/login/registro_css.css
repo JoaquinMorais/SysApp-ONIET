@@ -142,7 +142,7 @@ body{
     padding: 0 220px 0 220px;
 }
 
-@media(max-width: 830px){
+@media(max-width: 1100px){
     .container{
         width: 600px;
     }
@@ -173,6 +173,9 @@ body{
     .container-input{
         width: 100%;
         height: 100%;
+    }
+    .container-input-item-radio{
+        padding: 0 100px 0 100px;
     }
 }
 
