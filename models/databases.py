@@ -1,3 +1,4 @@
+from math import trunc
 from utils.db import db
 import crypt
 from datetime import date
@@ -53,6 +54,36 @@ class Usuarios(db.Model):
     def gastos_totales(self):
         return sum([x.monto for x in self.registros if x.tipo == '-'])
 
+    
+    
+    def porcentaje_ocio(self):
+        valor = sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'ocio'])
+        return trunc(((valor*100)/self.gastos_totales())*100)/100
+
+    def porcentaje_impuestos(self):
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'impuestos'])
+        return trunc(((valor*100)/self.gastos_totales())*100)/100
+    
+    def porcentaje_salud(self):
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'salud'])
+        return trunc(((valor*100)/self.gastos_totales())*100)/100
+    
+    def porcentaje_servicios(self):
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'servicios'])
+        return trunc(((valor*100)/self.gastos_totales())*100)/100
+    
+    def porcentaje_gastronomia(self):
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'gastronomia'])
+        return trunc(((valor*100)/self.gastos_totales())*100)/100
+    
+    def porcentaje_compras(self):
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'compras'])
+        return trunc(((valor*100)/self.gastos_totales())*100)/100
+    
+    def porcentaje_otros(self):
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion not in ['ocio','impuestos','salud','servicios','gastronomia','compras']])
+        return trunc(((valor*100)/self.gastos_totales())*100)/100
+    
     def len_registros(self):
         return len(self.registros)
     

@@ -68,14 +68,14 @@
                         <ul>
                         {% for il in g.user.ultimos_registros() %}
                             <li>
-                                {% if il.descripcion == 'auto' %}
+                                {% if il.descripcion == 'ocio' %}
                                     <div class="container_style">
                                         <img class="icon iOcio" src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-noir.png" alt="">
                                         <p>OCIO:</p> 
                                     </div>
                                     <p class="amount negativo">  
                                 {% else %}
-                                    {% if il.descripcion == 'chupetin' %}
+                                    {% if il.descripcion == 'impuestos' %}
                                         <div class="container_style">
                                             <img class="icon iImpuesto" src="https://cdn-icons-png.flaticon.com/512/2228/2228838.png" alt="">
                                             <p>IMPUESTOS:</p> 
@@ -127,7 +127,11 @@
                                             <img class="icon iOtros" src="https://cdn-icons-png.flaticon.com/512/7182/7182095.png" alt="">
                                             <p>OTROS:</p> 
                                         </div>
-                                        <p class="amount negativo">
+                                        {% if il.tipo == '-' %}
+                                            <p class="amount negativo">
+                                        {% else %}
+                                            <p class="amount positivo">
+                                        {% endif %}
                                 {%  endif %}
                                 {%  endif %}
                                 {%  endif %}
@@ -166,46 +170,41 @@
             </div>
             <div class="data_grid">
                 <div class="data_info grid_item">
-                    <img class="icon iIngreso" src="https://cdn-icons-png.flaticon.com/512/50/50098.png" alt="">
-                    <p>INGRESO:</p> 
-                    <p>50%</p>
-                </div>
-                <div class="data_info grid_item">
                     <img class="icon iSalud" src="https://cdn-icons-png.flaticon.com/512/2786/2786369.png" alt="">
                     <p>SALUD:</p> 
-                    <p>50%</p>
+                    <p>{{ g.user.porcentaje_salud() }}%</p>
                 </div>
                 <div class="data_info grid_item">
                     <img class="icon iComida" src="https://cdn-icons-png.flaticon.com/512/685/685301.png" alt="">
                     <p>GASTRONOMIA:</p> 
-                    <p>50%</p>
+                    <p>{{ g.user.porcentaje_gastronomia() }}%</p>
                 </div>
                 <div class="data_info grid_item">
                     <img class="icon iOcio" src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-noir.png" alt="">
                     <p>OCIO:</p> 
-                    <p>50%</p>
+                    <p>{{ g.user.porcentaje_ocio() }}%</p>
                 </div>
                 <div class="data_info grid_item">
                     <img class="icon iCompras" src="https://cdn-icons-png.flaticon.com/512/4202/4202388.png" alt="">
                     <p>COMPRAS:</p> 
-                    <p>50%</p>
-                </div>
-                <div class="data_info grid_item">
-                    <img class="icon iOtros" src="https://cdn-icons-png.flaticon.com/512/7182/7182095.png" alt="">
-                    <p>OTROS:</p> 
-                    <p>50%</p>
-                </div>
-            </div>    
-            <div class="data_grid_small">
-                <div class="data_info grid_item">
-                    <img class="icon iImpuesto" src="https://cdn-icons-png.flaticon.com/512/2228/2228838.png" alt="">
-                    <p>IMPUESTOS:</p> 
-                    <p>50%</p>
+                    <p>{{ g.user.porcentaje_compras() }}%</p>
                 </div>
                 <div class="data_info grid_item">
                     <img class="icon iServicio" src="https://cdn-icons-png.flaticon.com/512/3267/3267605.png" alt="">
                     <p>SERVICIOS:</p> 
-                    <p>50%</p>
+                    <p>{{ g.user.porcentaje_servicios() }}%</p>
+                </div>
+                <div class="data_info grid_item">
+                    <img class="icon iImpuesto" src="https://cdn-icons-png.flaticon.com/512/2228/2228838.png" alt="">
+                    <p>IMPUESTOS:</p> 
+                    <p>{{ g.user.porcentaje_impuestos() }}%</p>
+                </div>
+            </div>    
+            <div class="data_grid_small">
+                <div class="data_info grid_item">
+                    <img class="icon iOtros" src="https://cdn-icons-png.flaticon.com/512/7182/7182095.png" alt="">
+                    <p>OTROS:</p> 
+                    <p>{{ g.user.porcentaje_otros() }}%</p>
                 </div>
             </div>
         </div>
