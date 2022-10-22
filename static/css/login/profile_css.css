@@ -169,6 +169,9 @@ p{
     padding: 5px;
     box-shadow: 0px 3px 15px 1px rgba(0,0,0,0.5);
 }
+.v_buttons a:hover{
+    text-decoration: underline;
+}
 .v_reg{
     display: flex;
     align-items: center;

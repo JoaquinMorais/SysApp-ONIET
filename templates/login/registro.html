@@ -25,14 +25,26 @@
                 </div>
                 <div class="container-input-item">
                     <div class="container-input-item-radio">
-                        <p class="pos"><input type="radio" name="tipo" value="+">Ingreso</p>
-                        <p class="neg"><input type="radio" name="tipo" value="-">Perdida</p>
+                        <p class="pos"><input type="radio" name="tipo" value="+" id="positivo" onclick="Habilitar()"/>Ingreso</p>
+                        <p class="neg"><input type="radio" name="tipo" value="-" id="negativo" onclick="Habilitar()"/>Perdidas</p>
                     </div>
                 </div>
-                
-                <div class="container-input-item">
-                    <span class="container-input-item-icon2 material-symbols-outlined">description</span>
-                    <input class="container-input-item-descripcion" type="text" placeholder="Agregue una descripcion" name="descripcion">
+
+                <div class="respuestaInput1" id="respuestaInput1">
+                        <span class="container-input-item-icon2 material-symbols-outlined">description</span>
+                        <input class="container-input-item-descripcion" type="text" placeholder="Agregue una descripcion" id="descripcion" name="descripcion">
+                </div>
+
+                <div class="respuestaInput2" id="respuestaInput2">
+                        <select name="caracteristica" class="container-input-item-comboBox" id="comboBox">
+                            <option value="tipo">SALUD</option>
+                            <option value="tipo">GASTRONOMIA</option>
+                            <option value="tipo">OCIO</option>
+                            <option value="tipo">COMPRAS</option>
+                            <option value="tipo">SERVICIOS</option>
+                            <option value="tipo">IMPUESTOS</option>
+                            <option value="tipo">OTROS</option>
+                        </select>
                 </div>
                 <div class="container-button">
                     <button type="submit">¡Listo!</button>
@@ -41,5 +53,8 @@
         </div>
     </div>
 
+
+    <script src="{{ url_for('static',filename='js/registro_js.js') }}"></script>
 </body>
 </html>
+
