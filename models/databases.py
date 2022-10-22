@@ -1,8 +1,11 @@
 from math import trunc
+
+from sqlalchemy import null
 from utils.db import db
 import crypt
 from datetime import date
 from dateutil import relativedelta as rd
+import random
 """
 class ExampleDatabase(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -25,6 +28,8 @@ class Usuarios(db.Model):
     username = db.Column(db.String(50))
     password = db.Column(db.String(50))
     plataTotal = db.Column(db.Integer)
+    meta = db.Column(db.Integer)
+    direccionFoto = db.Column(db.String(100))
 
     registros = db.relationship('Registros')
     sueldos = db.relationship('Sueldos')
@@ -33,6 +38,8 @@ class Usuarios(db.Model):
         self.username = username
         self.password = crypt.crypt(password, 'salt')
         self.plataTotal = 0
+        self.meta = 0
+        self.direccionFoto = f'src/logos/{random.randint(1,10)}.png'
     
     def __repr__(self):
         return f'<id: {self.idUsuario}, name: "{self.username}", describe: "{self.password}">'
@@ -52,36 +59,39 @@ class Usuarios(db.Model):
         return sum([x.monto for x in self.registros if x.tipo == '+' or x.tipo == '='])
     
     def gastos_totales(self):
-        return sum([x.monto for x in self.registros if x.tipo == '-'])
+        gastos = sum([x.monto for x in self.registros if x.tipo == '-'])
+        if gastos == 0:
+            return 1
+        return gastos
 
     
     
     def porcentaje_ocio(self):
-        valor = sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'ocio'])
+        valor = sum([x.monto for x in self.registros if x.tipo == '-' and x.caracteristica == 'ocio'])
         return trunc(((valor*100)/self.gastos_totales())*100)/100
 
     def porcentaje_impuestos(self):
-        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'impuestos'])
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.caracteristica == 'impuestos'])
         return trunc(((valor*100)/self.gastos_totales())*100)/100
     
     def porcentaje_salud(self):
-        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'salud'])
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.caracteristica == 'salud'])
         return trunc(((valor*100)/self.gastos_totales())*100)/100
     
     def porcentaje_servicios(self):
-        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'servicios'])
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.caracteristica == 'servicios'])
         return trunc(((valor*100)/self.gastos_totales())*100)/100
     
     def porcentaje_gastronomia(self):
-        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'gastronomia'])
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.caracteristica == 'gastronomia'])
         return trunc(((valor*100)/self.gastos_totales())*100)/100
     
     def porcentaje_compras(self):
-        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion == 'compras'])
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.caracteristica == 'compras'])
         return trunc(((valor*100)/self.gastos_totales())*100)/100
     
     def porcentaje_otros(self):
-        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.descripcion not in ['ocio','impuestos','salud','servicios','gastronomia','compras']])
+        valor =  sum([x.monto for x in self.registros if x.tipo == '-' and x.caracteristica not in ['ocio','impuestos','salud','servicios','gastronomia','compras']])
         return trunc(((valor*100)/self.gastos_totales())*100)/100
     
     def len_registros(self):
@@ -99,6 +109,11 @@ class Usuarios(db.Model):
         for i in range(largo):
             lista_reverse.append(lista[largo-(1+i)])
         return lista_reverse
+
+
+
+
+
 class Registros(db.Model):
     __tablename__ = 'registros'
     idRegistro = db.Column(db.Integer, primary_key = True)
@@ -107,16 +122,21 @@ class Registros(db.Model):
     tipo = db.Column(db.String(1))
     fecha = db.Column(db.Date)
     plataTotal = db.Column(db.Integer)
-    
+    caracteristica = db.Column(db.String(25))
+
     idUsuario = db.Column(db.Integer, db.ForeignKey('usuarios.idUsuario'))
     usuario = db.relationship('Usuarios')
 
-    def __init__(self,monto,descripcion,tipo,fecha,idUsuario):
+    def __init__(self,monto,descripcion,tipo,fecha,idUsuario,caracteristica):
         self.monto = monto
         self.descripcion = descripcion
         self.tipo = tipo
         self.fecha = fecha
         self.idUsuario = idUsuario 
+        self.caracteristica = ' '
+        if caracteristica != None:
+            self.caracteristica = caracteristica.lower()
+        
         self.plataTotal = 0
         
     

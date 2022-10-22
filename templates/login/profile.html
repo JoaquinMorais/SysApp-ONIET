@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/login/profile_css.css') }}">
-    <title>Document</title>
+    <title>PlatMe - ONIET</title>
 </head>
 <body>
     <div class="container">
@@ -31,7 +31,7 @@
                             <p>TU META:</p> 
                         </div>
                         <p class="amount">
-                            25000$
+                            {{g.user.meta}}$
                         </p> 
                     </div>
                     <div class="v_info">
@@ -49,7 +49,11 @@
                             <p>TOTAL GASTADO</p> 
                         </div>
                         <p class="amount">
-                            {{ g.user.gastos_totales() }}$
+                            {% if g.user.gastos_totales() == 1%}
+                                0$  
+                            {% else %}
+                                {{ g.user.gastos_totales() }}$
+                            {% endif %}
                         </p> 
                     </div>
                 </div>
@@ -68,21 +72,21 @@
                         <ul>
                         {% for il in g.user.ultimos_registros() %}
                             <li>
-                                {% if il.descripcion == 'ocio' %}
+                                {% if il.caracteristica == 'ocio' %}
                                     <div class="container_style">
                                         <img class="icon iOcio" src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-noir.png" alt="">
                                         <p>OCIO:</p> 
                                     </div>
                                     <p class="amount negativo">  
                                 {% else %}
-                                    {% if il.descripcion == 'impuestos' %}
+                                    {% if il.caracteristica == 'impuestos' %}
                                         <div class="container_style">
                                             <img class="icon iImpuesto" src="https://cdn-icons-png.flaticon.com/512/2228/2228838.png" alt="">
                                             <p>IMPUESTOS:</p> 
                                         </div>
                                         <p class="amount negativo">
                                 {%  else %}
-                                    {% if il.descripcion == 'salud' %}
+                                    {% if il.caracteristica == 'salud' %}
                                     <li>
                                         <div class="container_style">
                                             <img class="icon iSalud" src="https://cdn-icons-png.flaticon.com/512/2786/2786369.png" alt="">
@@ -90,7 +94,7 @@
                                         </div>
                                         <p class="amount negativo">
                                 {% else %}
-                                    {% if il.descripcion == 'servicios' %}
+                                    {% if il.caracteristica == 'servicios' %}
                                     <li>
                                         <div class="container_style">
                                             <img class="icon iServicio" src="https://cdn-icons-png.flaticon.com/512/3267/3267605.png" alt="">
@@ -98,7 +102,7 @@
                                         </div>
                                         <p class="amount negativo">
                                 {% else %}
-                                    {% if il.descripcion == 'ingreso' %}
+                                    {% if il.caracteristica == 'ingreso' %}
                                     <li>
                                         <div class="container_style">
                                             <img class="icon iIngreso" src="https://cdn-icons-png.flaticon.com/512/50/50098.png" alt="">
@@ -106,7 +110,7 @@
                                         </div>
                                         <p class="amount positivo">
                                 {% else %}
-                                    {% if il.descripcion == 'gastronomia' %}
+                                    {% if il.caracteristica == 'gastronomia' %}
                                         <li>
                                         <div class="container_style">
                                             <img class="icon iComida" src="https://cdn-icons-png.flaticon.com/512/685/685301.png" alt="">
@@ -114,7 +118,7 @@
                                         </div>
                                         <p class="amount negativo">
                                 {% else %}
-                                    {% if il.descripcion == 'compras' %}
+                                    {% if il.caracteristica == 'compras' %}
                                     <li>
                                         <div class="container_style">
                                             <img class="icon iCompras" src="https://cdn-icons-png.flaticon.com/512/4202/4202388.png" alt="">
