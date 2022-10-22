@@ -63,12 +63,14 @@ p{
     filter: brightness(0.1) invert(0.5) sepia(0.5) hue-rotate(100deg) saturate(200%) contrast(200%);
 }
 
-.container_v .profile{
+.profile{
     width: 200px;
+    height: 200px;
     margin-bottom: 20px;
     border-radius: 100%;
     border: 5px solid #00000085;
 }
+
 .v_info{
     display: flex;
     justify-content: space-between;

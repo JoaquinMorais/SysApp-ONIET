@@ -1,0 +1,89 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(to right, rgb(0, 0, 211), rgb(0, 221, 221));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    background: rgba(255, 255, 255, .60);
+    padding: 4rem;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 1px 0px 13px 5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 1px 0px 13px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 0px 13px 5px rgba(0,0,0,0.75);
+}
+
+.divImg{
+    height: 32%;
+    width: 100%;
+}
+
+.divImg img{
+    width: 80px;
+}
+
+.divP{
+    height: 32%;
+    width: 100%;
+}
+
+.divP p{
+    font-size: 25px;
+    margin: 30px 10px 30px 10px;
+}
+
+.divInput{
+    height: 32%;
+    width: 100%;
+}
+
+.divInput input[type="number"]{
+    width: 50%;
+    height: 30px;
+    border-radius: 20px;
+    text-align: center;
+    opacity: .8;
+}
+
+.divInput input[type="number"]:focus{
+    background-color: white;
+}
+
+.divImg, .divP, .divInput{
+    text-align: center;
+}
+
+.return-btn{
+    border-radius: 30px;
+    width: 36px;
+    height: 36px;
+    font-size: 25px;
+    background-color: rgb(0, 80, 201);
+    color: azure;
+}
+
+.div-update{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-up{
+    margin-top: 5%;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: rgb(0, 80, 201);
+    font-size: large;
+    color: azure;
+    box-shadow: 0px 1px 78px 17px rgba(114,114,232,0.75);
+-webkit-box-shadow: 0px 1px 78px 17px rgba(114,114,232,0.75);
+-moz-box-shadow: 0px 1px 78px 17px rgba(114,114,232,0.75);
+
+}

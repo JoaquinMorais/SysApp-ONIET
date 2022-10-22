@@ -4,7 +4,7 @@ from utils.db import db
 from datetime import date
 from dateutil import relativedelta
 import crypt
-
+from .graficos import CreatePlotIE,CreatePlotPT,CreateBarPlot,CreatePlot
 
 Login = Blueprint("Login",__name__)
 
@@ -80,7 +80,7 @@ def profile():
     if not g.user:
         return redirect(url_for('Login.login'))
     
-    print(f'TEST \n len_registros: {g.user.len_registros()}\nultimos_registros: {g.user.ultimos_registros()}')
+    
 
     for sueldo in g.user.sueldos:
         fecha = sueldo.fecha
@@ -101,13 +101,16 @@ def registro():
         return redirect(url_for('Login.login'))
     else:
         if request.method == 'POST':
-            mt = request.form['monto']
-            tp = request.form['tipo']
-            desc = request.form['descripcion']
             try:
-                carc = request.form['caracteristica']
+                mt = request.form['monto']
+                tp = request.form['tipo']
+                desc = request.form['descripcion']
+                try:
+                    carc = request.form['caracteristica']
+                except:
+                    carc = None
             except:
-                carc = None
+                return redirect(url_for('Login.registro'))
             newInstance = Registros(int(mt),desc,tp,date.today(),g.user.idUsuario,carc)
             db.session.add(newInstance)
             db.session.commit()
@@ -123,10 +126,12 @@ def sueldo():
         return redirect(url_for('Login.login'))
     else:
         if request.method == 'POST':
-            mt = request.form['sueldo']
-            fc = request.form['fecha']
-            desc = request.form['descripcion']
-            
+            try:
+                mt = request.form['sueldo']
+                fc = request.form['fecha']
+                desc = request.form['descripcion']
+            except:
+                return redirect(url_for('Login.sueldo'))
             print(fc)
             if date(int(fc[0:4]),int(fc[5:7]),int(fc[-2:])) > date.today():
                 newInstance = Sueldos(int(mt),desc,fc,g.user.idUsuario)
@@ -138,6 +143,22 @@ def sueldo():
         else:
             return render_template("login/sueldo.html")
 
+@Login.route("/meta",methods=['GET','POST'])
+def meta():
+
+    if not g.user:
+        return redirect(url_for('Login.login'))
+    else:
+        if request.method == 'POST':
+            try: 
+                met = request.form['meta']
+            except:
+                return redirect(url_for('Login.meta'))
+            g.user.meta = int(met)
+            db.session.commit()
+            return redirect(url_for('Login.profile'))
+        else:
+            return render_template("login/meta.html")
 
 
 @Login.route("/añadir")

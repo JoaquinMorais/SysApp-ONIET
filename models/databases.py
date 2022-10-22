@@ -39,13 +39,30 @@ class Usuarios(db.Model):
         self.password = crypt.crypt(password, 'salt')
         self.plataTotal = 0
         self.meta = 0
-        self.direccionFoto = f'src/logos/{random.randint(1,10)}.png'
+        self.direccionFoto = f'src/logos/{random.randint(1,11)}.png'
     
     def __repr__(self):
         return f'<id: {self.idUsuario}, name: "{self.username}", describe: "{self.password}">'
 
-    def plata_total(self):
+    def registro_plata(self):
         return [{'x':x.fecha,'y':x.plataTotal} for x in self.registros]
+
+    def registro_ingreso(self):
+        return [{'x':x.fecha,'y':x.monto} for x in self.registros if x.tipo == '+' or x.tipo == '=']
+    
+    def registro_gasto(self):
+        return [{'x':x.fecha,'y':x.monto} for x in self.registros if x.tipo == '-']
+
+    def registro_caractGasto(self):
+        return [
+            {'nombre':'OCIO','porcentaje':self.porcentaje_ocio()},
+            {'nombre':'IMPUESTOS','porcentaje':self.porcentaje_impuestos()},
+            {'nombre':'SALUD','porcentaje':self.porcentaje_salud()},
+            {'nombre':'SERVICIOS','porcentaje':self.porcentaje_servicios()},
+            {'nombre':'GASTRONOMIA','porcentaje':self.porcentaje_gastronomia()},
+            {'nombre':'COMPRAS','porcentaje':self.porcentaje_compras()},
+            {'nombre':'OTROS','porcentaje':self.porcentaje_otros()},
+        ]
 
     def modificar_registro(self,monto,descripcion,tipo):
         if (len(self.registros) >= 2):

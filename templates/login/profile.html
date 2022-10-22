@@ -12,7 +12,7 @@
         <div class="container_column">
             <div class="container_v t1">
                 <div class="v_content v_image">
-                    <img class="profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfSfN5JOCG-ch9NfObJKaLyv6RUPyNZaDDP9bO_tF9Ccv-ET1gCgcgy5wJnlUdKslWkIk&usqp=CAU" alt="">
+                    <img class="profile" src="{{ url_for('static',filename=g.user.direccionFoto) }}" alt="">
                     <p>{{ g.user.username.upper() }}</p>
                 </div>
                 <div class="v_content">
@@ -30,9 +30,10 @@
                             <img class="icon i3" src="https://cdn-icons-png.flaticon.com/512/60/60481.png" alt="">
                             <p>TU META:</p> 
                         </div>
+                        <a href="{{url_for('Login.meta')}}" style="text-decoration:none;color:black;">
                         <p class="amount">
                             {{g.user.meta}}$
-                        </p> 
+                        </p> </a>
                     </div>
                     <div class="v_info">
                         <div class="container_style">
@@ -154,18 +155,7 @@
         </div>
         <div class="container_column container_graph">
             
-            <div class="graph_holder">
-                <h1>
-                    GRAFICO POR MES:
-                </h1>
-                <img src="https://www.aprenderpython.net/wp-content/uploads/2017/06/figura3.png" alt="">
-            </div>
-            <div class="graph_holder">
-                <h1>
-                    TU PLATA ESTE MES:
-                </h1>
-                <img src="https://www.aprenderpython.net/wp-content/uploads/2017/06/figura3.png" alt="">
-            </div>
+            
             <div class="graph_holder">
                 <h1>
                     TUS GASTOS:
