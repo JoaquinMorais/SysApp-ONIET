@@ -227,7 +227,8 @@ p{
 
 .graph_holder img{
     width: 500px;
-    height: 200px;
+    height: 350px;
+    border-radius: 15px;
 }
 
 .graph_holder h1{
@@ -265,6 +266,7 @@ p{
     }
     .graph_holder img{
         width: 350px;
+        height: 250px;
     }
     .graph_holder h1{
         font-size: medium;
@@ -283,6 +285,7 @@ p{
     }
     .graph_holder img{
         width: 250px;
+        height: 200px;
     }
     .graph_holder h1{
         font-size: medium;
@@ -301,6 +304,7 @@ p{
     }
     .graph_holder img{
         width: 500px;
+        height: 350px;
     }
     .graph_holder h1{
         font-size: large;
@@ -326,6 +330,7 @@ p{
     }
     .graph_holder img{
         width: 250px;
+        height: 200px;
     }
     .graph_holder h1{
         font-size: large;
@@ -350,6 +355,7 @@ p{
     }
     .graph_holder img{
         width: 250px;
+        height: 200px;
     }
     .graph_holder h1{
         font-size: large;
@@ -377,6 +383,7 @@ p{
     }
     .graph_holder img{
         width: 200px;
+        height: 175px;
     }
     .graph_holder h1{
         font-size: large;
